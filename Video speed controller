@@ -1,0 +1,28 @@
+import cv2
+
+video_path = "C:/Users/Avinaash.A/Videos/WWE2K24_x64/WWE2K24_x64 2025.06.20 - 18.41.12.02.DVR.mp4"
+cap = cv2.VideoCapture(video_path)
+
+speed = 1.0
+fps = cap.get(cv2.CAP_PROP_FPS)
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    cv2.imshow("Video Playback", frame)
+
+    key = cv2.waitKey(int(1000 / (fps * speed))) & 0xFF
+
+    if key == 27:  # ESC
+        break
+    elif key == ord('+'):
+        speed = min(speed * 2, 16.0)
+        print(f"Speed: {speed}x")
+    elif key == ord('-'):
+        speed = max(speed / 2, 0.1)
+        print(f"Speed: {speed}x")
+
+cap.release()
+cv2.destroyAllWindows()
