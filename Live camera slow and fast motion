@@ -1,0 +1,22 @@
+import cv2
+
+cap = cv2.VideoCapture(0)  # Use webcam
+speed = 1.0  # Change this to 0.5 for slow motion, 2.0 for fast
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    cv2.imshow("Webcam Feed", frame)
+    key = cv2.waitKey(int(30 / speed)) & 0xFF
+
+    if key == 27:  # ESC
+        break
+    elif key == ord('+'):
+        speed = min(speed * 2, 4.0)
+    elif key == ord('-'):
+        speed = max(speed / 2, 0.25)
+
+cap.release()
+cv2.destroyAllWindows()
