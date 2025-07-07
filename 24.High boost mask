@@ -1,0 +1,7 @@
+blur = cv2.GaussianBlur(img, (5,5), 0)
+mask = cv2.subtract(img, blur)
+high_boost = cv2.addWeighted(img, 1.7, mask, 1, 0)
+
+cv2.imshow("High-Boost", high_boost)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
